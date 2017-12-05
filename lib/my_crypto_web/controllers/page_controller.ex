@@ -5,6 +5,6 @@ defmodule MyCryptoWeb.PageController do
 
   def index(conn, _params) do
     coins = ApiFetcher.selected_coin()
-    render conn, "index.html", coin: coins
+    render conn, "index.html", coins: coins
   end
 end
