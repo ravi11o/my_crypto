@@ -10,13 +10,19 @@ defmodule MyCrypto.ApiFetcher do
     Poison.decode!(body)
   end
 
-  def selected_coin() do
-    response =
+  def list_coins() do
+    {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get(@url <> "/?convert=INR&limit=1100")
+    body = Poison.decode!(body)
+    coins =
       for coin <- @coins do
-        {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get(@url <> coin <> "/")
-        Poison.decode!(body)
+        Enum.filter(body, fn(%{"id" => value}) -> value == coin end)
       end
-      List.flatten(response)
+    List.flatten(coins)
+  end
+
+  def single_coin(coin) do
+    {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get(@url <> coin <> "/?convert=INR")
+    Poison.decode!(body) |> List.first
   end
 
 

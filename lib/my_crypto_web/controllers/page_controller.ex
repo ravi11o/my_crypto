@@ -4,7 +4,13 @@ defmodule MyCryptoWeb.PageController do
   alias MyCrypto.ApiFetcher
 
   def index(conn, _params) do
-    coins = ApiFetcher.selected_coin()
+    coins = ApiFetcher.list_coins()
     render conn, "index.html", coins: coins
+  end
+
+  def show(conn, %{"coin" => coin}) do
+    coin = ApiFetcher.single_coin(coin)
+    IO.inspect coin
+    render conn, "show.html", coin: coin
   end
 end
