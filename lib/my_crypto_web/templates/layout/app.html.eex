@@ -15,10 +15,10 @@
     <div class="fluid-container">
       <nav class="navbar navbar-dark bg-light justify-content-between">
         <a class="navbar-brand">My Crypto</a>
-        <form class="form-inline navbar-right">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <%= form_for @conn, page_path(@conn, :search), [as: :search_input, class: "form-inline navbar-right"], fn f -> %>
+          <%= text_input f, :search, [class: "form-control mr-sm-2"] %>
+          <%= submit "Search", [class: "btn btn-outline-success my-2 my-sm-0"] %>
+        <% end %>
       </nav>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

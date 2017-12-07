@@ -10,7 +10,11 @@ defmodule MyCryptoWeb.PageController do
 
   def show(conn, %{"coin" => coin}) do
     coin = ApiFetcher.single_coin(coin)
-    IO.inspect coin
+    render conn, "show.html", coin: coin
+  end
+
+  def search(conn, %{"search_input" => %{"search" => coin}}) do
+    coin = ApiFetcher.single_coin(coin)
     render conn, "show.html", coin: coin
   end
 end

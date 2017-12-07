@@ -18,6 +18,7 @@ defmodule MyCryptoWeb.Router do
 
     get "/", PageController, :index
     get "/:coin", PageController, :show
+    post "/search", PageController, :search
   end
 
   # Other scopes may use custom stacks.
